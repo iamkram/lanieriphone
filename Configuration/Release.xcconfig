@@ -1,0 +1,16 @@
+// Release build settings.
+//
+// For an App Store build, prefer IDX_PROVIDER = proxy and point IDX_BASE_URL at
+// an endpoint on lanierproperties.net that holds the MLS credentials server-side.
+// A key compiled into the binary is extractable by anyone who downloads the app,
+// and most MLS IDX agreements prohibit redistributing feed credentials that way.
+
+IDX_PROVIDER = proxy
+IDX_BASE_URL = https:/$()/lanierproperties.net/wp-json/lanier-idx/v1
+IDX_API_KEY =
+IDX_ORIGINATING_SYSTEM_NAME = MemphisTN
+IDX_OFFICE_KEY =
+
+LANIER_DEVELOPMENT_TEAM =
+
+#include? "Secrets.xcconfig"

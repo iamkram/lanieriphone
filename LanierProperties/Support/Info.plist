@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Lanier Properties</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+
+	<!-- iPhone only, portrait plus both landscape orientations. -->
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+
+	<!--
+	  A UILaunchScreen dictionary is required for apps built with the iOS 14+
+	  SDK. Keeping it a plain branded background avoids the "launch screen must
+	  not be an advertisement" rejection under guideline 4.0.
+	-->
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>BrandBackground</string>
+		<key>UIImageName</key>
+		<string>LaunchLogo</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<true/>
+	</dict>
+
+	<!--
+	  Location is used only to centre the property map on the user. It is
+	  optional: every screen works without it, so the app never blocks on the
+	  permission prompt.
+	-->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Lanier Properties uses your location to show nearby listings on the map. You can browse and search every property without sharing your location.</string>
+
+	<!--
+	  No ATS exceptions. All listing feeds and images must be served over HTTPS;
+	  requesting an exception invites an App Review question we don't need.
+	-->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+	</dict>
+
+	<!-- Declares the app uses no non-exempt encryption, skipping the export
+	     compliance questionnaire on every upload. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+
+	<!-- Schemes the app opens: phone, email and the website. -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+		<string>mailto</string>
+	</array>
+
+	<!-- Custom fonts. Remove entries for any file not actually bundled. -->
+	<key>UIAppFonts</key>
+	<array>
+		<string>PlayfairDisplay-SemiBold.ttf</string>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-Medium.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
+	</array>
+
+	<!--
+	  IDX / MLS feed configuration. Values come from Configuration/*.xcconfig,
+	  which is git-ignored — no credentials live in this file or in the
+	  repository. See docs/IDX_INTEGRATION.md.
+	-->
+	<key>IDXProvider</key>
+	<string>$(IDX_PROVIDER)</string>
+	<key>IDXBaseURL</key>
+	<string>$(IDX_BASE_URL)</string>
+	<key>IDXAPIKey</key>
+	<string>$(IDX_API_KEY)</string>
+	<key>IDXOriginatingSystemName</key>
+	<string>$(IDX_ORIGINATING_SYSTEM_NAME)</string>
+	<key>IDXOfficeKey</key>
+	<string>$(IDX_OFFICE_KEY)</string>
+</dict>
+</plist>

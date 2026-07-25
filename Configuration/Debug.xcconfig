@@ -1,0 +1,18 @@
+// Debug build settings.
+//
+// Credentials do NOT live in this file. Copy Secrets.xcconfig.example to
+// Secrets.xcconfig (git-ignored) and put the real values there — the optional
+// include below picks them up when present.
+
+// Default: bundled sample data, so a fresh clone builds and runs with no setup.
+IDX_PROVIDER = mock
+IDX_BASE_URL =
+IDX_API_KEY =
+IDX_ORIGINATING_SYSTEM_NAME = MemphisTN
+IDX_OFFICE_KEY =
+
+// Your Apple Developer team ID. Also settable as an environment variable.
+LANIER_DEVELOPMENT_TEAM =
+
+// `#include?` is an optional include: no error when the file is absent.
+#include? "Secrets.xcconfig"
