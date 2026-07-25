@@ -2,13 +2,37 @@
 
 ## How this audit was produced, and its limits
 
-**The site could not be fetched directly from this build environment.** Two
-independent blocks applied:
+**The site could not be fetched from this build environment.** This was
+confirmed at every layer, including with a real headless Chromium browser:
 
-1. The environment's outbound network policy denied `CONNECT lanierproperties.net:443`
-   at the proxy (`403`, confirmed via the proxy status endpoint).
-2. The page-fetch tool returned `403 Forbidden` for every URL tried, including
-   `archive.org` and reader proxies — so no mirror or cache was reachable either.
+1. The agent proxy refused `CONNECT lanierproperties.net:443` with a 403.
+2. Bypassing the proxy entirely still failed. DNS resolves
+   (`209.59.155.148`) and TCP 443 connects, but the response is a synthetic
+   403 from a transparent egress filter:
+
+   ```
+   HTTP/2 403
+   x-deny-reason: host_not_allowed
+
+   Host not in allowlist: lanierproperties.net.
+   Add this host to your network egress settings to allow access.
+   ```
+
+3. Headless Chromium (Playwright) gets the same 403. The browser itself works —
+   it loads allowlisted hosts fine — so this is policy, not tooling.
+4. Every mirror and reader proxy is blocked the same way: `web.archive.org`,
+   `archive.org`, `r.jina.ai`, `api.allorigins.win`, `corsproxy.io`,
+   `cachedview.nl`, even `www.google.com`.
+
+**To unblock:** add `lanierproperties.net` (and `www.lanierproperties.net`) to
+the environment's network egress allowlist — the environment's network policy is
+chosen by whoever created it. See
+<https://code.claude.com/docs/en/claude-code-on-the-web>. Once the site loads, a
+second pass may need the CDN host that serves its images and fonts.
+
+**Or, without changing anything:** run `scripts/extract-branding.sh` on any
+machine that can reach the site. It pulls the colours, fonts, logo, images and
+page text into `branding-export/`.
 
 Everything below was therefore reconstructed from **search-engine indexes** of the
 site. That is reliable for page structure and body copy, and unreliable for

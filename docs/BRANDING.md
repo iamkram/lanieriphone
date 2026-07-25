@@ -5,6 +5,22 @@ so the app ships with a **placeholder palette and stand-in fonts**. Everything
 visual is centralised, so making the app match the website exactly is a short,
 mechanical job — no view files need editing.
 
+## Fastest path: run the extraction script
+
+From any machine that can reach the site:
+
+```bash
+chmod +x scripts/extract-branding.sh
+./scripts/extract-branding.sh
+```
+
+It writes `branding-export/` containing the colour frequency table, font
+families and downloaded font files, the logo and hero images, every page's
+text, the sitemap, and a guess at which IDX plugin the site runs. That covers
+almost everything the sections below ask you to gather by hand.
+
+---
+
 There are exactly three places to touch:
 
 | What | Where |
